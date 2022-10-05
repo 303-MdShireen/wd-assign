@@ -1,9 +1,9 @@
 const http = require('http')
-const hostname = '127.0.0.1';
-const port = 5000;
 const fs= require("fs");
 //const { response } = require('express');
-
+let homecontent="";
+let filecontent="";
+let reg="";
 fs.readFile("home.html",
 (err,home) => {
 if(err){
@@ -29,17 +29,17 @@ fs.readFile("registration.html",
     }
  reg=regf;
 })
-//let args=require("minimist")(process.argv.slice(2));
-var server=http.createServer((request,response) =>{
+let args=require("minimist")(process.argv.slice(2));
+http.createServer((request,response) =>{
     let url =request.url
     response.writeHeader(200,{"Content-type":"text/html"})
     switch (url)
     {
-        case "/project":
+        case "./project":
             response.write(filecontent)
             response.end();
             break
-        case "/registration":
+        case "./registration":
             response.write(reg)
             response.end();
             break;
@@ -48,7 +48,4 @@ var server=http.createServer((request,response) =>{
             response.end();
             break;
     }
-});
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-  });
+}).listen(args["port"]);
