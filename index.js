@@ -35,11 +35,11 @@ http.createServer((request,response) =>{
     response.writeHeader(200,{"Content-type":"text/html"})
     switch (url)
     {
-        case "./project":
+        case "/project":
             response.write(filecontent)
             response.end();
             break
-        case "./registration":
+        case "/registration":
             response.write(reg)
             response.end();
             break;
